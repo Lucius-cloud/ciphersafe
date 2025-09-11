@@ -29,5 +29,9 @@ app.post('/api/auth/2fa/generate', (req, res) => {
   res.json({ message: '2FA secret generated (example)' });
 });
 
+app.get("/", (req, res) => {
+  res.send("🔐 CipherSafe API is running.");
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
