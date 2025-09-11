@@ -102,3 +102,18 @@ AES Encryption → All stored credentials are encrypted before saving in DB.
 HIBP Integration → Checks if a password has appeared in known data breaches.
 
 Password Strength Meter → Ensures users set strong, secure passwords.
+
+## 🚀 Deployment  
+
+The project is live!  
+
+🔗 **Base URL**: [https://ciphersafe-96l7.onrender.com](https://ciphersafe-96l7.onrender.com)  
+
+### Example Endpoints  
+- `POST /api/auth/register` → Register a new user  
+- `POST /api/auth/login` → Login user & get JWT  
+- `GET /api/credentials` → Get all credentials (JWT required)  
+
+> Use this URL in Postman or your frontend by prefixing endpoints with the base URL.  
+Example: `https://ciphersafe-96l7.onrender.com/api/auth/register`
+
