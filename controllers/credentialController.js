@@ -6,7 +6,7 @@ const checkHIBP = require("../utils/breachChecker");
 const algorithm = "aes-256-ctr";
 
 // ✅ Secure 32-byte encryption key
-const rawKey = process.env.ENCRYPTION_KEY || "myverystrongsecretkey123";
+const rawKey = process.env.ENCRYPTION_KEY || "0123456789abcdef0123456789abcdef";
 const secretKey = crypto.createHash("sha256").update(rawKey).digest();
 console.log("Key length (should be 32):", secretKey.length);
 
