@@ -4,12 +4,16 @@ const Credential = require("../models/Credential");
 const checkHIBP = require("../utils/breachChecker");
 
 const algorithm = "aes-256-ctr";
-const secretKey = process.env.ENCRYPTION_KEY || "myverystrongsecretkey123";
+
+// ✅ Secure 32-byte encryption key
+const rawKey = process.env.ENCRYPTION_KEY || "myverystrongsecretkey123";
+const secretKey = crypto.createHash("sha256").update(rawKey).digest();
+console.log("Key length (should be 32):", secretKey.length);
 
 // 🔑 Encrypt
 const encrypt = (text) => {
   const iv = crypto.randomBytes(16);
-  const cipher = crypto.createCipheriv(algorithm, Buffer.from(secretKey, "utf-8"), iv);
+  const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
   const encrypted = Buffer.concat([cipher.update(text, "utf8"), cipher.final()]);
   return { iv: iv.toString("hex"), content: encrypted.toString("hex") };
 };
@@ -18,7 +22,7 @@ const encrypt = (text) => {
 const decrypt = (hash) => {
   const decipher = crypto.createDecipheriv(
     algorithm,
-    Buffer.from(secretKey, "utf-8"),
+    secretKey,
     Buffer.from(hash.iv, "hex")
   );
   const decrypted = Buffer.concat([
