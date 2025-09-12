@@ -6,30 +6,44 @@ const checkHIBP = require("../utils/breachChecker");
 const algorithm = "aes-256-ctr";
 
 // ✅ Secure 32-byte encryption key
-const rawKey = process.env.ENCRYPTION_KEY || "0123456789abcdef0123456789abcdef";
+const rawKey = (process.env.ENCRYPTION_KEY || "0123456789abcdef0123456789abcdef").trim();
 const secretKey = crypto.createHash("sha256").update(rawKey).digest();
+
+console.log("ENCRYPTION_KEY from env:", JSON.stringify(process.env.ENCRYPTION_KEY));
+console.log("rawKey (trimmed):", rawKey);
 console.log("Key length (should be 32):", secretKey.length);
+console.log("secretKey buffer?", Buffer.isBuffer(secretKey)); 
 
 // 🔑 Encrypt
 const encrypt = (text) => {
-  const iv = crypto.randomBytes(16);
-  const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
-  const encrypted = Buffer.concat([cipher.update(text, "utf8"), cipher.final()]);
-  return { iv: iv.toString("hex"), content: encrypted.toString("hex") };
+  try {
+    const iv = crypto.randomBytes(16);
+    const cipher = crypto.createCipheriv(algorithm, secretKey, iv);
+    const encrypted = Buffer.concat([cipher.update(text, "utf8"), cipher.final()]);
+    return { iv: iv.toString("hex"), content: encrypted.toString("hex") };
+  } catch (error) {
+    console.error("Encryption failed:", error);
+    throw error;
+  }
 };
 
 // 🔓 Decrypt
 const decrypt = (hash) => {
-  const decipher = crypto.createDecipheriv(
-    algorithm,
-    secretKey,
-    Buffer.from(hash.iv, "hex")
-  );
-  const decrypted = Buffer.concat([
-    decipher.update(Buffer.from(hash.content, "hex")),
-    decipher.final(),
-  ]);
-  return decrypted.toString("utf8");
+  try {
+    const decipher = crypto.createDecipheriv(
+      algorithm,
+      secretKey,
+      Buffer.from(hash.iv, "hex")
+    );
+    const decrypted = Buffer.concat([
+      decipher.update(Buffer.from(hash.content, "hex")),
+      decipher.final(),
+    ]);
+    return decrypted.toString("utf8");
+  } catch (error) {
+    console.error("Decryption failed:", error);
+    throw error;
+  }
 };
 
 // 📌 Create Credential
