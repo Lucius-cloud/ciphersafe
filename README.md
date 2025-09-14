@@ -123,7 +123,7 @@ Below are the tested API endpoints with sample screenshots and explanations :
 
 ## Screenshots
 📂 **screenshots/**  
-__This folder contains all Postman testing screenshots for API demonstration.__
+**This folder contains all Postman testing screenshots for API demonstration.**
 
 
 ## 📸 API Demonstration  
