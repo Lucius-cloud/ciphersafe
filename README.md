@@ -12,7 +12,7 @@ A secure credential manager built with Node.js, featuring JWT authentication, 2F
 - ✅ AES encryption for sensitive data  
 - ✅ Breach detection using [HIBP API](https://haveibeenpwned.com/)  
 - ✅ Password strength meter  
-- ✅ Two-Factor Authentication (2FA) for extra security  
+- ✅ Two-Factor Authentication (Time-based TOTP) for extra security
 
 ---
 
@@ -109,7 +109,7 @@ Credential Schema
 
 AES Encryption → All stored credentials are encrypted before saving in DB.
 
-2FA → Optional two-factor authentication with TOTP (Google Authenticator, Authy, etc.).
+2FA → Time-based One-Time Password (TOTP) 2FA with Google Authenticator, Authy, etc.
 
 HIBP Integration → Checks if a password has appeared in known data breaches.
 
