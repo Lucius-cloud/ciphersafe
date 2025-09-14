@@ -121,53 +121,57 @@ Password Strength Meter → Ensures users set strong, secure passwords.
 
 Below are the tested API endpoints with sample screenshots and explanations :
 
+## Screenshots
+📂 **screenshots/**  
+_This folder contains all Postman testing screenshots for API demonstration._
+
 ## 📸 API Demonstration  
 
 ### 1. 📝 User Registration  
 Registers a new user with `username`, `email`, and `password`. Returns a success message.  
-![Register](./screenshots/_registration.png)  
+![Register](screenshots/_registration.png)  
 
 ---
 
 ### 2. 🔑 User Login  
 Authenticates the user with credentials. Returns a **JWT token** on success.  
-![Login](./screenshots/_login.png)  
+![Login](screenshots/_login.png)  
 
 ---
 
 ### 3. 🎫 JWT Token  
 The JWT token is required for all protected routes. Save it in headers as:  
 Authorization: Bearer <your_jwt_token>
-![JWT](./screenshots/_jwt token.png)  
+![JWT](screenshots/_jwt token.png)  
 
 
 ### 4. 👤 Profile   
 Fetches the user’s profile information using the JWT.  
-![Profile](./screenshots/_profile.png)  
+![Profile](screenshots/_profile.png)  
 
 ---
 
 ### 5. ➕ Create Credential  
 Saves a new credential (service, username, password). The password is **AES encrypted** before storage.  
-![Create Credential](./screenshots/_create_credential.png)  
+![Create Credential](screenshots/_create_credential.png)  
 
 ---
 
 ### 6. 📂 Get Credentials  
 Fetches all saved credentials for the logged-in user.  
-![Get Credentials](./screenshots/_get_credentials.png)  
+![Get Credentials](screenshots/_get_credentials.png)  
 
 ---
 
 ### 7. ✏️ Update Credential  
 Updates an existing credential’s password or username.  
-![Update Credential](./screenshots/_update_credential.png)  
+![Update Credential](screenshots/_update_credential.png)  
 
 ---
 
 ### 8. 🗑️ Delete Credential  
 Deletes a credential by its unique ID.  
-![Delete Credential](./screenshots/_delete_credential.png)  
+![Delete Credential](screenshots/_delete_credential.png)  
 
 ---
 
@@ -179,7 +183,7 @@ Checks if a password/email has appeared in known data breaches using the **HIBP 
 
 ### 10. 🛡️ Password Strength  
 Evaluates password strength to ensure users choose strong, secure passwords.  
-![Strength](./screenshots/_strength_check.png)  
+![Strength](screenshots/_strength_check.png)  
 
 ---
 
@@ -188,19 +192,19 @@ Evaluates password strength to ensure users choose strong, secure passwords.
    ![AES Encryption](./screenshots/11_aes_encrypt.png)  
 
 - **Decrypt**: Credentials are decrypted only when fetched back by the user.
-   ![AES Decryption](./screenshots/_aes_decrypt.png)  
+   ![AES Decryption](screenshots/_aes_decrypt.png)  
   
 ---
 
 ### 12. 🔑 Two-Factor Authentication (2FA)  
 - **Setup**: Generates a secret or QR code for Google Authenticator/Authy.
-   ![2FA](./screenshots/2FA_setup.png)
+   ![2FA](screenshots/2FA_setup.png)
 
 - **Verify**: User submits the 6-digit TOTP code for verification.
-   ![2FA](./screenshots/2FA_verify.png)
+   ![2FA](screenshots/2FA_verify.png)
  
 - **Login with 2FA**: After password login, user must provide 2FA code for final access.
-   ![2FA](./screenshots/login_2FA.png)  
+   ![2FA](screenshots/login_2FA.png)  
 
 ---
 
