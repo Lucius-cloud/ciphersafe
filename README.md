@@ -73,24 +73,35 @@ Credential Schema
   password: String,   // AES encrypted
   createdAt: Date
 }
-## 📌 API Endpoints  
 
-### 🔑 Auth  
 
-| Method | Endpoint             | Description          | Body Example |
-|--------|----------------------|----------------------|--------------|
-| POST   | `/api/auth/register` | Register new user    | ```json { "username": "testuser", "email": "test@example.com", "password": "StrongPass123!" } ``` |
-| POST   | `/api/auth/login`    | Login user & get JWT | ```json { "username": "testuser", "password": "StrongPass123!" } ``` |
+
+## 📌 API Endpoints
+
+### 🔑 Auth
+| Method | Endpoint            | Description             | Body Example                                                                 |
+|--------|---------------------|-------------------------|------------------------------------------------------------------------------|
+| POST   |  /api/auth/register | Register new user       | ```json { "username": "testuser", "email": "test@example.com", "password": "StrongPass123!" } ``` |
+| POST   |  /api/auth/login    | Login & get JWT token   | ```json { "username": "testuser", "password": "StrongPass123!" } ``` |
 
 ---
 
-### 🗄 Credentials  
+### 📂 Credentials
+| Method | Endpoint                  | Description                         | Body Example                                                                 |
+|--------|---------------------------|-------------------------------------|------------------------------------------------------------------------------|
+| GET    |  /api/credentials         | Get all saved credentials (JWT req) | -                                                                            |
+| POST   |  /api/credentials         | Add new credential                  | ```json { "service": "gmail", "username": "myemail@gmail.com", "password": "MyPass123!" } ``` |
+| PUT    |  /api/credentials/:id     | Update credential by ID             | ```json { "username": "newmail@gmail.com", "password": "NewPass456!" } ```   |
+| DELETE |  /api/credentials/:id     | Delete credential by ID             | -                                                                            |
 
-| Method | Endpoint                  | Description                   | Body Example |
-|--------|----------------------------|-------------------------------|--------------|
-| GET    | `/api/credentials`         | Get all saved credentials (JWT required) | – |
-| POST   | `/api/credentials`         | Add new credential            | ```json { "service": "gmail", "username": "myemail@gmail.com", "password": "EncryptedPass123!" } ``` |
-| DELETE | `/api/credentials/:id`     | Delete credential by ID       | – |
+---
+
+### 🛡️ Security Features
+| Method | Endpoint                  | Description                                      | Body Example                                  |
+|--------|---------------------------|--------------------------------------------------|-----------------------------------------------|
+| GET    |  /api/auth/2fa/setup           | Setup 2FA (get QR/secret)                   | -                                             |
+| POST   |  /api/auth/2fa/verify          | Verify TOTP code                            | ```json { "token": "123456" } ```             |
+| POST   |  /api/auth/2fa/login           | Login with 2FA after password auth          | ```json { "username": "test", "password": "StrongPass123!", "token": "123456" } ``` |
 
 
 
